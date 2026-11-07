@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   ANSWER DIGITAL — système de design
+   Palette issue du logo officiel (voir tailwind.config.ts)
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-navy text-ink antialiased font-sans;
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgba(33, 211, 237, 0.10), transparent 60%),
+      radial-gradient(50rem 35rem at -10% 30%, rgba(74, 222, 128, 0.07), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-white;
+  }
+
+  ::selection {
+    background: rgba(74, 222, 128, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #21d3ed;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply relative py-20 sm:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-brand-cyan;
+  }
+
+  .section-title {
+    @apply mt-5 text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .section-lead {
+    @apply mt-5 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg;
+  }
+
+  .gradient-text {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition duration-200 sm:text-[0.95rem];
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-gradient text-navy-950 shadow-glow hover:brightness-110 hover:shadow-[0_0_50px_-6px_rgba(74,222,128,0.5)];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/[0.04] text-white hover:border-brand-cyan/60 hover:bg-white/[0.08];
+  }
+
+  .card {
+    @apply relative rounded-2xl border border-white/10 bg-navy-800/60 shadow-card backdrop-blur transition duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:-translate-y-1 hover:border-brand-green/40 hover:bg-navy-800;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+}
+
+/* Apparition douce au chargement */
+.reveal {
+  animation: fade-up 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
