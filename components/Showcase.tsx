@@ -80,7 +80,7 @@ export function Showcase() {
               <div className="relative border-t border-white/10 bg-navy-900 px-5 py-10 sm:px-10">
                 <div className="grid-pattern absolute inset-0" aria-hidden />
                 <div className="absolute -inset-10 bg-brand-gradient-soft blur-3xl" aria-hidden />
-                <ul className="relative mx-auto flex max-w-3xl snap-x snap-mandatory gap-5 overflow-x-auto pb-2 sm:justify-center sm:overflow-visible">
+                <ul className="relative mx-auto flex max-w-5xl snap-x snap-mandatory gap-5 overflow-x-auto pb-2 sm:justify-center sm:overflow-visible">
                   {p.screenshots.length > 0 ? (
                     p.screenshots.map((s) => (
                       <li
