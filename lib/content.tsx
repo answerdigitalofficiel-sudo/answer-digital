@@ -358,6 +358,35 @@ export const projects: Project[] = [
     ],
     demoUrl: "https://nepios-creator.github.io/Cahier-num-rique-/installer.html",
   },
+  {
+    slug: "drapp",
+    name: "Drapp — le droit congolais à portée de main",
+    status: "Réalisé",
+    kind: "Application web progressive (PWA)",
+    description:
+      "Une application de référence pour les étudiants de première année de droit en RDC : textes juridiques, sources, actualités, assistant intelligent et groupe d'étude réunis dans un même endroit.",
+    problem:
+      "Les textes de loi et leurs sources sont dispersés, ce qui complique l'étude, la recherche d'un article précis et les révisions.",
+    solution:
+      "Une bibliothèque juridique consultable depuis le téléphone, enrichie d'une recherche interne, d'un assistant spécialisé et d'un espace d'échange entre étudiants.",
+    features: [
+      "Bibliothèque de textes : Constitution de la RDC, Code de la famille (loi modificative de 2016), Déclaration universelle des droits de l'homme, Déclaration de Stockholm et d'autres textes",
+      "Exposés des motifs et sources du droit",
+      "Article du jour et actualités quotidiennes du droit congolais et international",
+      "Assistant IA spécialisé en droit congolais et international, avec des réponses appuyées sur des sources consultables",
+      "Groupe d'étude public pour échanger de façon anonyme",
+      "Recherche interne dans les textes",
+      "Surlignage, commentaires, export et import des annotations",
+      "Taille du texte réglable",
+    ],
+    screenshots: [
+      { src: "/projects/drapp-1.jpg", alt: "Écran d'accueil de l'application Drapp" },
+      { src: "/projects/drapp-2.jpg", alt: "Article du jour et sujets d'étude dans Drapp" },
+      { src: "/projects/drapp-3.jpg", alt: "Bibliothèque des textes du droit congolais dans Drapp" },
+      { src: "/projects/drapp-4.jpg", alt: "Assistant juridique de Drapp" },
+    ],
+    demoUrl: "https://nepios-creator.github.io/droit-rdc/",
+  },
 ];
 
 export const advantages = [
