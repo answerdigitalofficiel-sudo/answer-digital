@@ -322,8 +322,10 @@ export type Project = {
   description: string;
   problem: string;
   solution: string;
-  /** Chemin d'une capture d'écran dans /public, sinon null. */
-  screenshot: string | null;
+  /** Fonctionnalités réellement présentes dans l'application. */
+  features: string[];
+  /** Captures d'écran (chemins dans /public). Liste vide si aucune. */
+  screenshots: { src: string; alt: string }[];
   /** Lien de démonstration, sinon null (le bouton n'est alors pas affiché). */
   demoUrl: string | null;
 };
@@ -340,8 +342,21 @@ export const projects: Project[] = [
       "Le cahier traditionnel se perd, s'abîme, ne se recherche pas et ne se partage pas facilement.",
     solution:
       "Une application installable sur téléphone, qui centralise la prise de notes et l'organisation des cours dans un seul espace numérique.",
-    screenshot: null,
-    demoUrl: null,
+    features: [
+      "Bibliothèque de cahiers organisés par cours, avec leurs pages",
+      "Recherche dans les cours et les notes",
+      "Favoris et étiquettes pour retrouver une note rapidement",
+      "Reprise de la dernière note en un geste",
+      "Tri des cahiers par récence ou par ordre alphabétique",
+      "Import de documents et envoi de notes",
+      "Notes conservées sur l'appareil de l'utilisateur",
+    ],
+    screenshots: [
+      { src: "/projects/cahier-numerique-1.jpg", alt: "Écran d'accueil de l'application Cahier numérique" },
+      { src: "/projects/cahier-numerique-2.jpg", alt: "Bibliothèque de cahiers avec recherche, favoris et tri" },
+      { src: "/projects/cahier-numerique-3.jpg", alt: "Éditeur de notes d'un cahier" },
+    ],
+    demoUrl: "https://nepios-creator.github.io/Cahier-num-rique-/installer.html",
   },
 ];
 
