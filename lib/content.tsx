@@ -28,8 +28,11 @@ export const site = {
   email: "answerdigitalofficiel@gmail.com",
   city: "Kinshasa",
   country: "République démocratique du Congo",
-  // Sera renseigné quand le numéro WhatsApp sera disponible.
-  whatsapp: null as string | null,
+  /** Numéro WhatsApp au format international, sans « + » ni espaces. */
+  whatsapp: "243999983163" as string | null,
+  whatsappDisplay: "+243 999 983 163",
+  /** URL de la page Facebook. À renseigner : le lien n'est affiché que s'il existe. */
+  facebook: null as string | null,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   description:
     "ANSWER DIGITAL conçoit des applications, plateformes web et systèmes numériques qui transforment les défis des organisations en opportunités de croissance.",
@@ -47,6 +50,15 @@ export const nav = [
 
 export const mailto = (subject = "Parler de mon projet") =>
   `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
+
+export const whatsappLink = (message = "Bonjour ANSWER DIGITAL, je souhaite parler de mon projet.") =>
+  site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}` : null;
+
+/** Chiffre d'usage communiqué par ANSWER DIGITAL (à justifier avec les statistiques d'utilisation). */
+export const usage = {
+  headline: "Plus de 6 000 étudiants",
+  text: "utilisent nos applications Drapp et Cahier numérique.",
+};
 
 export type Service = {
   slug: string;
