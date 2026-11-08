@@ -94,30 +94,46 @@ function InterfaceIllustration() {
 }
 
 /** Image d'accueil choisie : affichée seulement si le fichier existe dans /public/hero (sinon l'illustration reste). */
-const HERO_PHOTO = "/hero/affiche.png";
+const HERO_PHOTO = "/hero/affiche-paysage.jpg";
 const hasHeroPhoto = () => existsSync(path.join(process.cwd(), "public", HERO_PHOTO));
 
+/** Affiche paysage (16:9) : bannière pleine largeur, le titre et les contacts sont déjà dans l'image. */
 function PhotoHero() {
   return (
-    <div className="relative mx-auto w-full max-w-[26rem] lg:max-w-[28rem]">
-      <div className="absolute -inset-10 rounded-full bg-brand-gradient opacity-20 blur-3xl" aria-hidden />
-      <div className="card relative overflow-hidden !p-1.5">
-        <Image
-          src={HERO_PHOTO}
-          alt="Affiche ANSWER DIGITAL présentant Mr. Mayele, directeur de l'entreprise"
-          width={2480}
-          height={3508}
-          priority
-          sizes="(min-width: 1024px) 448px, 90vw"
-          className="h-auto w-full rounded-[0.9rem]"
-        />
+    <section id="accueil" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-32">
+      <div className="grid-pattern pointer-events-none absolute inset-0" aria-hidden />
+      <div className="container-x relative">
+        <div className="relative reveal">
+          <div className="absolute -inset-8 rounded-[3rem] bg-brand-gradient opacity-20 blur-3xl" aria-hidden />
+          <div className="card relative overflow-hidden !p-1.5 sm:!p-2">
+            <Image
+              src={HERO_PHOTO}
+              alt="ANSWER DIGITAL : Mr. Mayele, directeur. Vos défis méritent des solutions intelligentes."
+              width={1920}
+              height={1080}
+              priority
+              sizes="(min-width: 1280px) 1200px, 94vw"
+              className="h-auto w-full rounded-[0.9rem]"
+            />
+          </div>
+        </div>
+        <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <Link href="/#services" className="btn-primary justify-center">
+            Découvrir nos solutions
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+          <Link href="/devis" className="btn-ghost justify-center">
+            Parler de votre projet
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 export function Hero() {
-  const withPhoto = hasHeroPhoto();
+  if (hasHeroPhoto()) return <PhotoHero />;
   return (
     <section id="accueil" className="relative overflow-hidden pb-24 pt-32 sm:pb-32 sm:pt-40">
       <div className="grid-pattern pointer-events-none absolute inset-0" aria-hidden />
@@ -147,7 +163,7 @@ export function Hero() {
         </div>
 
         <div className="reveal [animation-delay:150ms]">
-          {withPhoto ? <PhotoHero /> : <InterfaceIllustration />}
+          <InterfaceIllustration />
         </div>
       </div>
     </section>
