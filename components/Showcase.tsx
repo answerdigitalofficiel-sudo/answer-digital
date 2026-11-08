@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects, usage } from "@/lib/content";
 import { LogoSymbol } from "./Logo";
 
@@ -35,37 +35,29 @@ export function Showcase() {
                   </span>
                 </div>
                 <h3 className="mt-5 text-2xl font-semibold sm:text-3xl">{p.name}</h3>
+                <p className="gradient-text mt-3 max-w-3xl text-lg font-medium leading-snug">{p.tagline}</p>
                 <p className="mt-4 max-w-3xl leading-relaxed text-ink-muted">{p.description}</p>
 
-                <dl className="mt-8 grid gap-8 lg:grid-cols-3">
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-cyan">
-                      Problème initial
-                    </dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{p.problem}</dd>
+                <h4 className="mt-8 text-xs font-semibold uppercase tracking-[0.16em] text-brand-cyan">
+                  {p.featuresTitle}
+                </h4>
+                <ul className="mt-4 grid gap-x-8 gap-y-3 md:grid-cols-2">
+                  {p.features.map((f) => (
+                    <li key={f.text} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
+                      <span className="shrink-0 text-base leading-snug" aria-hidden>{f.icon}</span>
+                      <span>{f.text}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {p.highlight && (
+                  <div className="mt-8 max-w-3xl rounded-2xl border border-brand-green/25 bg-brand-green/10 p-5">
+                    <h4 className="font-semibold text-white">{p.highlight.title}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{p.highlight.text}</p>
                   </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-green">
-                      Solution développée
-                    </dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{p.solution}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-lime">
-                      Fonctionnalités
-                    </dt>
-                    <dd className="mt-2">
-                      <ul className="space-y-2">
-                        {p.features.map((f) => (
-                          <li key={f} className="flex gap-2.5 text-sm leading-relaxed text-ink-muted">
-                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" aria-hidden />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                    </dd>
-                  </div>
-                </dl>
+                )}
+                {p.closing && <p className="mt-8 font-medium text-white">{p.closing}</p>}
+                {p.note && <p className="mt-4 text-sm text-ink-faint">{p.note}</p>}
 
                 {p.demoUrl && (
                   <a
