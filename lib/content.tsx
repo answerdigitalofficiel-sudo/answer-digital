@@ -32,7 +32,7 @@ export const site = {
   whatsapp: "243999983163" as string | null,
   whatsappDisplay: "+243 999 983 163",
   /** URL de la page Facebook. À renseigner : le lien n'est affiché que s'il existe. */
-  facebook: null as string | null,
+  facebook: "https://www.facebook.com/share/19hxVg1UKn/" as string | null,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   description:
     "ANSWER DIGITAL conçoit des applications, plateformes web et systèmes numériques qui transforment les défis des organisations en opportunités de croissance.",
@@ -329,13 +329,21 @@ export const sectors: Sector[] = [
 export type Project = {
   slug: string;
   name: string;
+  /** Phrase d'accroche affichée sous le nom. */
+  tagline: string;
   status: "Réalisé" | "Prototype" | "Expérimental";
   kind: string;
   description: string;
-  problem: string;
-  solution: string;
+  /** Titre de la liste de fonctionnalités. */
+  featuresTitle: string;
   /** Fonctionnalités réellement présentes dans l'application. */
-  features: string[];
+  features: { icon: string; text: string }[];
+  /** Encadré facultatif (ex. « Pourquoi c'est une avancée »). */
+  highlight?: { title: string; text: string };
+  /** Phrase de conclusion facultative. */
+  closing?: string;
+  /** Mention de prudence facultative. */
+  note?: string;
   /** Captures d'écran (chemins dans /public). Liste vide si aucune. */
   screenshots: { src: string; alt: string }[];
   /** Lien de démonstration, sinon null (le bouton n'est alors pas affiché). */
@@ -345,24 +353,25 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "cahier-numerique",
-    name: "Cahier numérique pour étudiants",
+    name: "Cahier numérique",
+    tagline: "Vos cours. Vos notes. Pour toujours.",
     status: "Réalisé",
     kind: "Application web progressive (PWA)",
     description:
-      "Un cahier numérique pensé pour remplacer le cahier traditionnel dans la vie quotidienne des étudiants, avec des fonctionnalités que le papier ne peut pas offrir.",
-    problem:
-      "Le cahier traditionnel se perd, s'abîme, ne se recherche pas et ne se partage pas facilement.",
-    solution:
-      "Une application installable sur téléphone, qui centralise la prise de notes et l'organisation des cours dans un seul espace numérique.",
+      "Un cahier par cours, des pages qui se remplissent en écrivant, en dictant, en enregistrant ou en scannant. Le tout s'installe comme une application, sans magasin.",
+    featuresTitle: "Ce que vous y trouvez",
     features: [
-      "Bibliothèque de cahiers organisés par cours, avec leurs pages",
-      "Recherche dans les cours et les notes",
-      "Favoris et étiquettes pour retrouver une note rapidement",
-      "Reprise de la dernière note en un geste",
-      "Tri des cahiers par récence ou par ordre alphabétique",
-      "Import de documents et envoi de notes",
-      "Notes conservées sur l'appareil de l'utilisateur",
+      { icon: "🎙", text: "Enregistrez vos cours, puis obtenez la transcription complète ou un résumé en un geste." },
+      { icon: "📄", text: "Scannez vos pages papier : le texte est reconnu et mis en forme automatiquement (titres, paragraphes, listes)." },
+      { icon: "🗣", text: "Dictez vos notes, écoutez-les à voix haute." },
+      { icon: "🎴", text: "Surlignez un passage : il devient une fiche de révision." },
+      { icon: "✨", text: "Complétez vos notes avec Wikipédia et l'IA, jusqu'à une leçon détaillée." },
+      { icon: "🔤", text: "Éditeur complet : 8 polices, couleurs, surlignage, listes numérotées." },
+      { icon: "📅", text: "Notez cours et examens, avec rappels dans votre calendrier." },
+      { icon: "📤", text: "Envoyez une page à un camarade, ou sauvegardez dans Google Drive." },
+      { icon: "🔒", text: "Ne perdez rien : enregistrement automatique et compte en ligne pour retrouver ses cahiers sur tout téléphone." },
     ],
+    closing: "Écrivez, parlez, scannez, enregistrez. Il s'occupe du reste.",
     screenshots: [
       { src: "/projects/cahier-numerique-1.jpg", alt: "Écran d'accueil de l'application Cahier numérique" },
       { src: "/projects/cahier-numerique-2.jpg", alt: "Bibliothèque de cahiers avec recherche, favoris et tri" },
@@ -372,25 +381,29 @@ export const projects: Project[] = [
   },
   {
     slug: "drapp",
-    name: "Drapp — le droit congolais à portée de main",
+    name: "Drapp : le droit congolais, à portée de main",
+    tagline: "L'application des étudiants en droit de RDC : lois, manuels, notes et assistant d'étude dans un seul téléphone.",
     status: "Réalisé",
     kind: "Application web progressive (PWA)",
     description:
-      "Une application de référence pour les étudiants de première année de droit en RDC : textes juridiques, sources, actualités, assistant intelligent et groupe d'étude réunis dans un même endroit.",
-    problem:
-      "Les textes de loi et leurs sources sont dispersés, ce qui complique l'étude, la recherche d'un article précis et les révisions.",
-    solution:
-      "Une bibliothèque juridique consultable depuis le téléphone, enrichie d'une recherche interne, d'un assistant spécialisé et d'un espace d'échange entre étudiants.",
+      "En L1, les textes sont longs, les manuels lourds et on étudie souvent seul. Drapp réunit tout et le rend lisible partout.",
+    featuresTitle: "Ce que vous y trouvez",
     features: [
-      "Bibliothèque de textes : Constitution de la RDC, Code de la famille (loi modificative de 2016), Déclaration universelle des droits de l'homme, Déclaration de Stockholm et d'autres textes",
-      "Exposés des motifs et sources du droit",
-      "Article du jour et actualités quotidiennes du droit congolais et international",
-      "Assistant IA spécialisé en droit congolais et international, avec des réponses appuyées sur des sources consultables",
-      "Groupe d'étude public pour échanger de façon anonyme",
-      "Recherche interne dans les textes",
-      "Surlignage, commentaires, export et import des annotations",
-      "Taille du texte réglable",
+      { icon: "📚", text: "Bibliothèque juridique : droit congolais, droit international, manuels et ressources, lisibles article par article." },
+      { icon: "🌅", text: "Article du jour à lire et à partager." },
+      { icon: "🔍", text: "Recherche instantanée dans tous les textes." },
+      { icon: "✏️", text: "Annotations : surlignage en 4 couleurs, commentaires, export et import, le tout sur votre téléphone." },
+      { icon: "📖", text: "Lecture confortable : taille du texte réglable, mode sombre, reprise là où vous vous êtes arrêté." },
+      { icon: "✨", text: "Assistant d'étude : il cherche d'abord dans les documents de Drapp, puis dans les sites officiels, et cite ses sources." },
+      { icon: "💬", text: "Groupe d'étude anonyme et modéré, ouvert à toute heure." },
+      { icon: "📰", text: "Actualités du droit chaque jour, avec leur source." },
+      { icon: "📲", text: "Installation simple par code QR ou depuis l'écran d'accueil, sans boutique d'applications." },
     ],
+    highlight: {
+      title: "Pourquoi c'est une avancée pour les L1",
+      text: "Tout est au même endroit, pensé d'abord pour le droit congolais. On étudie partout avec un simple téléphone, on ne reste plus seul face à ses questions, et on prend le réflexe d'apprendre chaque jour.",
+    },
+    note: "Drapp est un outil d'étude : vérifiez toujours le texte officiel.",
     screenshots: [
       { src: "/projects/drapp-1.jpg", alt: "Écran d'accueil de l'application Drapp" },
       { src: "/projects/drapp-2.jpg", alt: "Article du jour et sujets d'étude dans Drapp" },
