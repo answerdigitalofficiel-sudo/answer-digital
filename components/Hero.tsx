@@ -93,38 +93,24 @@ function InterfaceIllustration() {
   );
 }
 
-/** Photo d'ambiance. Affichée seulement si le fichier existe dans /public/hero (sinon l'illustration reste). */
-const HERO_PHOTO = "/hero/bureau.jpg";
+/** Image d'accueil choisie : affichée seulement si le fichier existe dans /public/hero (sinon l'illustration reste). */
+const HERO_PHOTO = "/hero/affiche.png";
 const hasHeroPhoto = () => existsSync(path.join(process.cwd(), "public", HERO_PHOTO));
 
 function PhotoHero() {
   return (
-    <div className="relative mx-auto w-full max-w-[34rem] pb-6 lg:max-w-none">
+    <div className="relative mx-auto w-full max-w-[26rem] lg:max-w-[28rem]">
       <div className="absolute -inset-10 rounded-full bg-brand-gradient opacity-20 blur-3xl" aria-hidden />
       <div className="card relative overflow-hidden !p-1.5">
         <Image
           src={HERO_PHOTO}
-          alt="Un professionnel souriant travaillant sur un ordinateur portable dans un bureau lumineux"
-          width={1400}
-          height={788}
+          alt="Affiche ANSWER DIGITAL présentant Mr. Mayele, directeur de l'entreprise"
+          width={2480}
+          height={3508}
           priority
-          sizes="(min-width: 1024px) 560px, 100vw"
+          sizes="(min-width: 1024px) 448px, 90vw"
           className="h-auto w-full rounded-[0.9rem]"
         />
-      </div>
-      <div className="absolute -bottom-0 left-1/2 flex w-max -translate-x-1/2 gap-2" aria-hidden>
-        {[
-          { icon: Smartphone, label: "Applications PWA", tone: "bg-brand-cyan/15 text-brand-cyan" },
-          { icon: Workflow, label: "Automatisation", tone: "bg-brand-green/15 text-brand-green" },
-          { icon: ShieldCheck, label: "Données sécurisées", tone: "bg-brand-lime/15 text-brand-lime", extra: "hidden sm:flex" },
-        ].map(({ icon: Icon, label, tone, extra }) => (
-          <div key={label} className={`card flex items-center gap-2 !rounded-full !bg-navy-950/95 py-1.5 pl-1.5 pr-3 ${extra ?? ""}`}>
-            <span className={`flex h-7 w-7 items-center justify-center rounded-full ${tone}`}>
-              <Icon className="h-3.5 w-3.5" />
-            </span>
-            <span className="text-[0.68rem] font-semibold text-white sm:text-xs">{label}</span>
-          </div>
-        ))}
       </div>
     </div>
   );
