@@ -1,7 +1,10 @@
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { mailto, site } from "@/lib/content";
+import Link from "next/link";
+import { ArrowUpRight, Mail, MapPin, MessageCircle } from "lucide-react";
+import { mailto, site, whatsappLink } from "@/lib/content";
 
 export function Contact() {
+  const wa = whatsappLink();
+
   return (
     <section id="contact" className="section">
       <div className="container-x">
@@ -15,20 +18,25 @@ export function Contact() {
               Parlons de <span className="gradient-text">votre projet</span>
             </h2>
             <p className="section-lead mx-auto">
-              Décrivez-nous votre difficulté : nous vous répondons avec une première orientation claire
-              et réaliste.
+              Décrivez-nous votre difficulté : nous l'étudions et revenons vers vous avec une première
+              orientation claire et réaliste.
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={mailto()} className="btn-primary">
-                <Mail className="h-4 w-4" aria-hidden />
-                Nous écrire
+              <Link href="/devis" className="btn-primary">
+                Demander un devis
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
-              </a>
+              </Link>
+              {wa && (
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                  <MessageCircle className="h-4 w-4 text-brand-green" aria-hidden />
+                  Écrire sur WhatsApp
+                </a>
+              )}
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 text-sm text-ink-muted sm:flex-row sm:gap-8">
-              <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-white">
+              <a href={mailto()} className="inline-flex items-center gap-2 hover:text-white">
                 <Mail className="h-4 w-4 text-brand-cyan" aria-hidden />
                 {site.email}
               </a>
