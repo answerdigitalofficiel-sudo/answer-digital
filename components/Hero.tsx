@@ -109,7 +109,7 @@ export function Hero() {
               Découvrir nos solutions
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/#contact" className="btn-ghost">
+            <Link href="/devis" className="btn-ghost">
               Parler de votre projet
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
