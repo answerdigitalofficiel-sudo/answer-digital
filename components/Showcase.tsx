@@ -38,8 +38,18 @@ export function Showcase() {
                 <p className="mt-4 max-w-3xl leading-relaxed text-ink-muted">{p.description}</p>
 
                 <dl className="mt-8 grid gap-8 lg:grid-cols-3">
-                  
-                  
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-cyan">
+                      Problème initial
+                    </dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{p.problem}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-green">
+                      Solution développée
+                    </dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{p.solution}</dd>
+                  </div>
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-lime">
                       Fonctionnalités
