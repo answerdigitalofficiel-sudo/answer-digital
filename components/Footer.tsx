@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { Facebook, Mail, MapPin, MessageCircle } from "lucide-react";
 import { Logo } from "./Logo";
-import { nav, site } from "@/lib/content";
+import { nav, site, whatsappLink } from "@/lib/content";
 
 export function Footer() {
+  const wa = whatsappLink();
+
   return (
     <footer className="border-t border-white/10 bg-navy-950">
       <div className="container-x py-16">
@@ -25,6 +27,11 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/devis" className="text-sm text-ink-muted transition hover:text-white">
+                  Demander un devis
+                </Link>
+              </li>
             </ul>
           </nav>
 
@@ -37,8 +44,24 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
+              {wa && (
+                <li className="flex items-center gap-2.5">
+                  <MessageCircle className="h-4 w-4 text-brand-green" aria-hidden />
+                  <a href={wa} target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+                    WhatsApp : {site.whatsappDisplay}
+                  </a>
+                </li>
+              )}
+              {site.facebook && (
+                <li className="flex items-center gap-2.5">
+                  <Facebook className="h-4 w-4 text-brand-cyan" aria-hidden />
+                  <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+                    Facebook : ANSWER DIGITAL
+                  </a>
+                </li>
+              )}
               <li className="flex items-center gap-2.5">
-                <MapPin className="h-4 w-4 text-brand-green" aria-hidden />
+                <MapPin className="h-4 w-4 text-brand-lime" aria-hidden />
                 {site.city}, {site.country}
               </li>
             </ul>
