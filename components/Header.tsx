@@ -58,7 +58,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/#contact" className="btn-primary hidden !py-2.5 sm:inline-flex">
+          <Link href="/devis" className="btn-primary hidden !py-2.5 sm:inline-flex">
             Parler de votre projet
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
@@ -91,7 +91,7 @@ export function Header() {
             ))}
           </ul>
           <Link
-            href="/#contact"
+            href="/devis"
             onClick={() => setOpen(false)}
             className="btn-primary mt-6 w-full"
           >
