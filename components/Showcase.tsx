@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Check } from "lucide-react";
-import { projects } from "@/lib/content";
+import { projects, usage } from "@/lib/content";
 import { LogoSymbol } from "./Logo";
 
 export function Showcase() {
@@ -15,6 +15,10 @@ export function Showcase() {
           <p className="section-lead">
             Voici ce que nous avons déjà construit. Chaque projet est présenté tel qu'il est, avec son
             statut réel.
+          </p>
+          <p className="mt-8 inline-flex flex-wrap items-baseline gap-x-2 rounded-2xl border border-brand-green/25 bg-brand-green/10 px-5 py-4">
+            <span className="gradient-text font-display text-2xl font-semibold">{usage.headline}</span>
+            <span className="text-ink">{usage.text}</span>
           </p>
         </div>
 
