@@ -52,6 +52,9 @@ export default async function AdminPanelLayout({ children }: { children: React.R
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <a href="/admin/export" download className="hidden text-sm text-ink-muted transition hover:text-white sm:inline">
+              Exporter (CSV)
+            </a>
             <Link href="/" className="hidden text-sm text-ink-muted transition hover:text-white sm:inline">
               Voir le site
             </Link>
