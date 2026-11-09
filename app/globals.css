@@ -113,7 +113,23 @@
   animation: fade-up 0.7s ease-out both;
 }
 
+/* Apparition au défilement (activée uniquement si JavaScript est disponible) */
+.js .rv {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.js .rv[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .js .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   html {
     scroll-behavior: auto;
   }
