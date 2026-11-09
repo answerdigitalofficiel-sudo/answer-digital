@@ -54,6 +54,14 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/diagnostic"
+                className="rounded-full px-4 py-2 text-sm font-medium text-ink-muted transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Diagnostic
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -89,6 +97,11 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            <li className="border-b border-white/10">
+              <Link href="/diagnostic" onClick={() => setOpen(false)} className="block py-4 text-lg font-medium text-white">
+                Diagnostic numérique
+              </Link>
+            </li>
           </ul>
           <Link
             href="/devis"
