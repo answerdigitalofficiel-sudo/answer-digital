@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { QuoteForm } from "@/components/QuoteForm";
 import { mailto, site, whatsappLink } from "@/lib/content";
+import { budgetOptions, deadlineOptions, sectorOptions, solutionOptions } from "@/lib/quote";
 
 export const metadata: Metadata = {
   title: "Demander un devis",
@@ -17,7 +18,20 @@ const steps = [
   { title: "Nous revenons vers vous", text: "Nous vous contactons pour échanger et vous faire une proposition adaptée." },
 ];
 
-export default function DevisPage() {
+type Search = { sector?: string; solution?: string; budget?: string; deadline?: string; note?: string };
+
+/** Ne garde une valeur proposée que si elle figure dans la liste autorisée. */
+const pick = (list: readonly string[], value?: string) => (value && list.includes(value) ? value : undefined);
+
+export default async function DevisPage({ searchParams }: { searchParams: Promise<Search> }) {
+  const q = await searchParams;
+  const prefill = {
+    sector: pick(sectorOptions, q.sector),
+    solution_type: pick(solutionOptions, q.solution),
+    budget: pick(budgetOptions, q.budget),
+    deadline: pick(deadlineOptions, q.deadline),
+    description: q.note ? q.note.slice(0, 500) + "\n\n" : undefined,
+  };
   const wa = whatsappLink("Bonjour ANSWER DIGITAL, je souhaite discuter de mon projet.");
 
   return (
@@ -37,7 +51,7 @@ export default function DevisPage() {
           </div>
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-start">
-            <QuoteForm whatsappHref={wa} />
+            <QuoteForm whatsappHref={wa} prefill={prefill} />
 
             <aside className="space-y-6 lg:sticky lg:top-28">
               <div className="card p-7">
