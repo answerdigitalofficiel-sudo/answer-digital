@@ -8,6 +8,7 @@ import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
+import { Marquee } from "@/components/Marquee";
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Header />
       <main id="contenu">
         <Hero />
+        <Marquee />
         <Reveal>
           <Services />
         </Reveal>
