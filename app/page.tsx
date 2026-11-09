@@ -7,6 +7,7 @@ import { WhyUs } from "@/components/WhyUs";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { Reveal } from "@/components/Reveal";
 
 export default function HomePage() {
   return (
@@ -14,12 +15,24 @@ export default function HomePage() {
       <Header />
       <main id="contenu">
         <Hero />
-        <Services />
-        <Solutions />
-        <Showcase />
-        <WhyUs />
-        <About />
-        <Contact />
+        <Reveal>
+          <Services />
+        </Reveal>
+        <Reveal>
+          <Solutions />
+        </Reveal>
+        <Reveal>
+          <Showcase />
+        </Reveal>
+        <Reveal>
+          <WhyUs />
+        </Reveal>
+        <Reveal>
+          <About />
+        </Reveal>
+        <Reveal>
+          <Contact />
+        </Reveal>
       </main>
       <Footer />
     </>
