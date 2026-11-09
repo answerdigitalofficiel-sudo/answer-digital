@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { notifyNewQuote } from "@/lib/notify";
 import { budgetOptions, deadlineOptions, sectorOptions, solutionOptions } from "@/lib/quote";
 
 export type QuoteFormState = {
@@ -91,6 +92,8 @@ export async function submitQuote(_prev: QuoteFormState, formData: FormData): Pr
       values,
     };
   }
+
+  await notifyNewQuote(values);
 
   return { status: "success" };
 }
