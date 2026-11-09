@@ -141,3 +141,178 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================
+   Mouvement permanent (doux, sans gêner la lecture)
+   Désactivé automatiquement si l'utilisateur réduit les animations.
+   ============================================================ */
+
+/* Halos lumineux qui dérivent lentement derrière tout le site */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  will-change: transform;
+}
+body::before {
+  width: 46vw;
+  height: 46vw;
+  left: -10vw;
+  top: 8vh;
+  background: radial-gradient(circle, rgba(33, 211, 237, 0.55), transparent 65%);
+  animation: aurora-a 22s ease-in-out infinite;
+}
+body::after {
+  width: 42vw;
+  height: 42vw;
+  right: -8vw;
+  bottom: -5vh;
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.5), transparent 65%);
+  animation: aurora-b 26s ease-in-out infinite;
+}
+@media (max-width: 640px) {
+  body::before,
+  body::after {
+    filter: blur(60px);
+  }
+}
+
+@keyframes aurora-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(9vw, 7vh, 0) scale(1.18); }
+}
+@keyframes aurora-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.1); }
+  50% { transform: translate3d(-10vw, -6vh, 0) scale(0.95); }
+}
+
+/* Dégradé des mots-clés qui coule lentement */
+.gradient-text {
+  background-size: 220% 220%;
+  animation: gradient-flow 9s ease-in-out infinite;
+}
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Reflet qui traverse les boutons principaux */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.38) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: shine 4.5s ease-in-out infinite;
+}
+@keyframes shine {
+  0%, 55% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+/* Quadrillage qui défile doucement */
+.grid-pattern {
+  animation: grid-pan 40s linear infinite;
+}
+@keyframes grid-pan {
+  from { background-position: 0 0; }
+  to { background-position: 48px 48px; }
+}
+
+/* Pastille vivante dans les étiquettes de section */
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: #4ade80;
+  animation: dot-ping 2.2s ease-out infinite;
+}
+@keyframes dot-ping {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.65); }
+  70%, 100% { box-shadow: 0 0 0 0.55rem rgba(74, 222, 128, 0); }
+}
+
+/* L'affiche et la fenêtre d'application de l'accueil flottent légèrement */
+#accueil .card.overflow-hidden {
+  animation: float-y 7s ease-in-out infinite;
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+/* Anneau qui pulse autour du bouton WhatsApp */
+.wa-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: wa-ring 2.6s ease-out infinite;
+}
+@keyframes wa-ring {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70%, 100% { box-shadow: 0 0 0 1.1rem rgba(37, 211, 102, 0); }
+}
+
+/* Bandeau défilant des services */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 55s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Barre de progression de lecture (navigateurs compatibles uniquement) */
+@supports (animation-timeline: scroll()) {
+  html::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #21d3ed, #4ade80, #a3e636);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    animation: read-progress linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes read-progress {
+    to { transform: scaleX(1); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  .btn-primary::after,
+  .wa-pulse::before,
+  html::before {
+    display: none;
+  }
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+}
