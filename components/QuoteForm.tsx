@@ -56,7 +56,14 @@ function Field({
   );
 }
 
-export function QuoteForm({ whatsappHref }: { whatsappHref: string | null }) {
+export function QuoteForm({
+  whatsappHref,
+  prefill = {},
+}: {
+  whatsappHref: string | null;
+  /** Valeurs proposées par défaut (par exemple depuis le diagnostic numérique). */
+  prefill?: Partial<Record<"sector" | "solution_type" | "budget" | "deadline" | "description", string>>;
+}) {
   const [state, formAction] = useActionState(submitQuote, initialState);
   const [startedAt, setStartedAt] = useState("");
   const topRef = useRef<HTMLDivElement>(null);
@@ -136,14 +143,14 @@ export function QuoteForm({ whatsappHref }: { whatsappHref: string | null }) {
           </Field>
         </div>
         <Field id="sector" label="Secteur d'activité" error={e.sector}>
-          <select id="sector" name="sector" required defaultValue={v.sector ?? ""}
+          <select id="sector" name="sector" required defaultValue={v.sector ?? prefill.sector ?? ""}
             aria-invalid={invalid("sector")} aria-describedby={describedBy("sector")} className="input">
             <option value="" disabled>Choisir…</option>
             {sectorOptions.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
         </Field>
         <Field id="solution_type" label="Type de solution recherchée" error={e.solution_type}>
-          <select id="solution_type" name="solution_type" required defaultValue={v.solution_type ?? ""}
+          <select id="solution_type" name="solution_type" required defaultValue={v.solution_type ?? prefill.solution_type ?? ""}
             aria-invalid={invalid("solution_type")} aria-describedby={describedBy("solution_type")} className="input">
             <option value="" disabled>Choisir…</option>
             {solutionOptions.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -152,20 +159,20 @@ export function QuoteForm({ whatsappHref }: { whatsappHref: string | null }) {
       </div>
 
       <Field id="description" label="Décrivez votre problème ou votre projet" error={e.description}>
-        <textarea id="description" name="description" rows={6} required maxLength={4000} defaultValue={v.description}
+        <textarea id="description" name="description" rows={6} required maxLength={4000} defaultValue={v.description ?? prefill.description}
           placeholder="Quelle difficulté rencontrez-vous ? Qu'aimeriez-vous améliorer ?"
           aria-invalid={invalid("description")} aria-describedby={describedBy("description")} className="input resize-y" />
       </Field>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <Field id="budget" label="Budget indicatif" error={e.budget} optional>
-          <select id="budget" name="budget" defaultValue={v.budget ?? ""} aria-invalid={invalid("budget")} className="input">
+          <select id="budget" name="budget" defaultValue={v.budget ?? prefill.budget ?? ""} aria-invalid={invalid("budget")} className="input">
             <option value="">Non précisé</option>
             {budgetOptions.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
         </Field>
         <Field id="deadline" label="Délai souhaité" error={e.deadline} optional>
-          <select id="deadline" name="deadline" defaultValue={v.deadline ?? ""} aria-invalid={invalid("deadline")} className="input">
+          <select id="deadline" name="deadline" defaultValue={v.deadline ?? prefill.deadline ?? ""} aria-invalid={invalid("deadline")} className="input">
             <option value="">Non précisé</option>
             {deadlineOptions.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
